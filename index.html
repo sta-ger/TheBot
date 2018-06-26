@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bot</title>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="https://tyleryasaka.github.io/semantic-ui-range/range.css">
+    <script src="https://tyleryasaka.github.io/semantic-ui-range/range.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/synaptic/1.1.4/synaptic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>
+
+    <script src="out/bot.js"></script>
+
+    <style>
+
+        #main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body bgcolor="#FFFFFF">
+<div id="main" style="width: 100%">
+    <div style="max-width: 600px; width: 100%; text-align: center; padding: 20px;">
+        <h1 class="ui header">The Bot</h1>
+        <div id="app"
+             style="overflow: hidden; display: flex; justify-content: center; box-shadow: 0 0 3px rgba(0,0,0,0.25);"></div>
+        <div style="display: flex; justify-items: center; padding-top: 10px">
+            <button style="height: 60px" class="ui fluid primary button" id="train">Start training</button>
+            <button style="height: 60px" class="ui fluid secondary button" id="stopTrain">Stop training</button>
+        </div>
+        <div style="display: flex; justify-items: center; padding-top: 10px">
+            <button class="ui fluid button blue" id="x1">x1</button>
+
+            <button class="ui fluid button grey" id="x2">x2</button>
+
+            <button class="ui fluid button grey" id="x3">x5</button>
+
+            <button class="ui fluid button grey" id="x4">x10</button>
+            <button class="ui fluid button grey" id="x100">x100</button>
+        </div>
+
+
+        <div style="width: 100%; margin-bottom: 10px; margin-top: 10px">
+
+            <p style="text-align: left; margin-top: 20px">At the bottom of the screen is placed a little <b>Bot</b> controlling by an artificial neural network.</p>
+            <p style="text-align: left">By clicking the empty area the target point is drawn and the Bot will be trying to aim on it. But there's a little problem: the Bot is stupid. It must be trained before it could properly aim on the target.</p>
+            <p style="text-align: left">By clicking the <b>START TRAINING</b> button a training mode is activated. During the training mode at the random point of the screen a target is creating automatically and the Bot is placing at the proper calculated angle for shot.</p>
+            <p style="text-align: left">After each succeed shot the neural network learns the proper angle for the current target coordinates.</p>
+            <p style="text-align: left">With the default hyperparameters it takes about 1000 training shots before the Bot starts to predict the right direction. More accurate results are starting after about 10000 training shots.</p>
+            <p style="text-align: left">Buttons <b>x1 x2 x5 x10 x100</b> allows to speedup the training process.</p>
+            <p style="text-align: left">If the <b>SHOW LOSS</b> checkbox is active the loss is calculating as a sum of differences between predicted and proper angle value for 4 grey test points.</p>
+
+            <p style="text-align: left">
+                Created using <a href="http://caza.la/synaptic">synaptic.js</a>, <a href="https://semantic-ui.com">Semantic UI</a>, <a href="https://greensock.com/tweenmax">TweenMax</a> and <a href="http://www.pixijs.com">PixiJS</a> by <a href="https://sta-ger.bitbucket.io/">sta-ger</a>.
+            </p>
+
+            <div class="ui horizontal divider">
+                Parameters
+            </div>
+
+            <div class="ui segments">
+                <div class="ui segment">
+                    <div class="ui right pointing basic label">
+                        Hidden layers
+                    </div>
+                    <div style="padding-top: 10px" class="ui input">
+                        <input id="tLayers" type="text">
+                    </div>
+                    <div id="sLayers" style="width: 100%" class="ui range"></div>
+                </div>
+
+                <div class="ui segment">
+                    <div class="ui right pointing basic label">
+                        Neurons on hidden layers
+                    </div>
+                    <div style="padding-top: 10px" class="ui input">
+                        <input id="tNeurons" type="text">
+                    </div>
+                    <div id="sNeurons" style="width: 100%" class="ui range"></div>
+                </div>
+
+                <div class="ui segment">
+                    <div class="ui right pointing basic label">
+                        Learning rate
+                    </div>
+                    <div style="padding-top: 10px" class="ui labeled input">
+                        <input id="tRate" type="text">
+                    </div>
+                    <div id="sRate" style="width: 100%" class="ui range"></div>
+                </div>
+
+                <div class="ui segment">
+                    <div class="ui right pointing basic label">
+                        Activation
+                    </div>
+                    <select id="dActiv" class="ui dropdown">
+                        <option value="sigmoid">Sigmoid</option>
+                        <option value="tanh">Tanh</option>
+                        <option value="relu">ReLU</option>
+                    </select>
+                </div>
+
+                <div class="ui segment">
+                    <div class="ui checkbox">
+                        <input id="cLoss" type="checkbox">
+                        <label>Show loss</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

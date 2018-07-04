@@ -145,9 +145,6 @@ export class Brain {
         p2.x = x;
         p2.y = y;
         angleRadians = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-        /*if (angleRadians < 0) {
-            angleRadians = Math.PI + (Math.PI + angleRadians);
-        }*/
         return angleRadians;
     }
 
